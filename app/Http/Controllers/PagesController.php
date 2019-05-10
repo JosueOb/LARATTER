@@ -18,7 +18,7 @@ class PagesController extends Controller
         ]);
     }
 
-    public function about(){
+    public function aboutUs(){
         return view('about');
     }
 }
