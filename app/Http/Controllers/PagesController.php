@@ -8,17 +8,31 @@ class PagesController extends Controller
 {
     
     public function home(){
-        $links = [
-            'https://platzi.com'=>'Platzi',
-            'https://www.epn.edu.ec/'=>'EPN',
-            'https://esfot.epn.edu.ec/'=>'ESFOT'
+        $messages = [
+            [
+                'id' => 1,
+                'content' => 'Este es mi primer mensaje',
+                'image' => 'https://lorempixel.com/600/338?1'
+            ],
+            [
+                'id' => 2,
+                'content' => 'Este es mi segundo mensaje',
+                'image' => 'https://lorempixel.com/600/338?2'
+            ],
+            [
+                'id' => 3,
+                'content' => 'Este es mi tercer mensaje',
+                'image' => 'https://lorempixel.com/600/338?3'
+            ],
+            [
+                'id' => 4,
+                'content' => 'Este es mi último mensaje',
+                'image' => 'https://lorempixel.com/600/338?4'
+            ]
+
         ];
         return view('welcome',[
-            'links'=> $links
+            'messages'=> $messages
         ]);
-    }
-
-    public function aboutUs(){
-        return view('about');
     }
 }

@@ -12,4 +12,3 @@
 */
 
 Route::get('/','PagesController@home');
-Route::get('/about-us','PagesController@aboutUs');
