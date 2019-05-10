@@ -18,6 +18,16 @@ secciones especificadas en el layout-->
         @csrf
         <div class="form-group">
             <input type="text" name="message" class="form-control" placeholder="Qué estás pensando?">
+            <!--la variable contiene un objeto de tipo messageBack, que contiene con todos los errores presentados-->
+            @if($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
         </div>
     </form>
 </div>
