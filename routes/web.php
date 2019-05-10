@@ -11,16 +11,5 @@
 |
 */
 
-Route::get('/', function () {
-    $links = [
-        'https://platzi.com'=>'Platzi',
-        'https://www.epn.edu.ec/'=>'EPN',
-        'https://esfot.epn.edu.ec/'=>'ESFOT'
-    ];
-    return view('welcome',[
-        'links'=> $links
-    ]);
-});
-Route::get('/about-us',function(){
-    return view('about');
-});
+Route::get('/','PagesController@home');
+Route::get('/about-us','PagesController@about');
