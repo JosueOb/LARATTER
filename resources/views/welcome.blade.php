@@ -14,6 +14,14 @@ secciones especificadas en el layout-->
     </nav>
 </div>
 <div class="row">
+    <form action="/messages/create" method="POST">
+        @csrf
+        <div class="form-group">
+            <input type="text" name="message" class="form-control" placeholder="Qué estás pensando?">
+        </div>
+    </form>
+</div>
+<div class="row">
 <!-- Forelse nos permite recorrer un arreglo y mostrarlos, y en el caso de que no se tenga
 ningún arreglo, entraría al apartado de empty -->
     @forelse($messages as $message)

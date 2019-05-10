@@ -14,4 +14,9 @@ class MessagesController extends Controller
             'message'=> $message
         ]);
     }
+
+    public function create(Request $request){
+        dd($request->all());//contiene el token y message
+        return 'Creación de mensaje';
+    }
 }
