@@ -81,17 +81,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laratter my first web system
-                </div>
-
-                <div class="links">
-                @if(isset($links))
-                    @foreach ( $links as $link => $text)
-                        <a href="{{ $link }}" target='_blank'>{{ $text }}</a>
-                    @endforeach
-                @else
-                    <p>No se encuentran los links</p>
-                @endif
+                    Acerca de nosotros
                 </div>
             </div>
         </div>

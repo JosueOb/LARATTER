@@ -12,5 +12,15 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $links = [
+        'https://platzi.com'=>'Platzi',
+        'https://www.epn.edu.ec/'=>'EPN',
+        'https://esfot.epn.edu.ec/'=>'ESFOT'
+    ];
+    return view('welcome',[
+        'links'=> $links
+    ]);
+});
+Route::get('/about-us',function(){
+    return view('about');
 });
