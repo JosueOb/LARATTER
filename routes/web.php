@@ -17,5 +17,6 @@ Route::get('/messages/{message}', 'MessagesController@show');//se espera un obje
 Route::post('/messages/create', 'MessagesController@create')->middleware('auth');//se protege esta ruta
 
 Auth::routes();
+Route::get('/{username}','UsersController@show');
 
 // Route::get('/home', 'HomeController@index')->name('home');

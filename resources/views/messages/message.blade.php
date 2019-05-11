@@ -6,7 +6,10 @@
 <div class="text-muted">Escrito por <a href="/{{$message->user->username}}">{{$message->user->name}}</a></div>
 
 {{-- <p class='card-text'>{{ $message['content'] }}</p> --}}
-<p class='card-text'>{{ $message->content }}</p>
-
-{{-- <a href="/messages/{{ $message['id'] }}">Leer más</a> --}}
-<a href="/messages/{{ $message->id }}">Leer más</a>
+<p class='card-text'>{{ $message->content }}
+    {{-- <a href="/messages/{{ $message['id'] }}">Leer más</a> --}}
+    <a href="/messages/{{ $message->id }}">Leer más</a>
+</p>
+<div class="card-text text-muted float-right">
+    {{$message->created_at}}
+</div>
