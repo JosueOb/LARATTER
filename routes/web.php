@@ -15,3 +15,6 @@ Route::get('/','PagesController@home');
 // Route::get('/messages/{id}', 'MessagesController@show');
 Route::get('/messages/{message}', 'MessagesController@show');//se espera un objeto message
 Route::post('/messages/create', 'MessagesController@create');
+Auth::routes();
+
+// Route::get('/home', 'HomeController@index')->name('home');
