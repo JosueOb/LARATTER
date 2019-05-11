@@ -27,9 +27,11 @@ class MessagesController extends Controller
         //     'message.max'=>'El mensaje no puede superar los 160 caracteres.'
         // ]);
         // return 'Creación de mensaje';
+        $user = $request->user();//se obtiene el usuario loggeado
         $message = new Message();
         $message->content = $request->get('message');
         $message->image = 'http://lorempixel.com/600/330?'.mt_rand(0,1000);
+        $message->user_id = $user->id;
         $message->save();
         // dd($message);
         return \redirect('/messages/'.$message->id);
