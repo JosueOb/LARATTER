@@ -46,5 +46,15 @@ ningún arreglo, entraría al apartado de empty -->
     @empty
         <p>No hay mensajes destacados</p>
     @endforelse
+
+    <!--Se verifica si se tiene más de un mensage, ojo solo cuando se utiliza el método de paginación
+    se obtiene el método links() que se agrena al objeto en el que se le aplica la paginación, 
+    no se obtiene este método si se consulta todos los mensajes all(), o si se realiza una query
+    al agregar el método links se aplica el template de paginación de bootsatrap-->
+    @if(count($messages))
+    <div class="mt-2 mx-auto">
+        {{ $messages->links() }}
+    </div>
+    @endif
 </div>
 @endsection
