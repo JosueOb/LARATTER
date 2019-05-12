@@ -20,6 +20,9 @@ Auth::routes();
 Route::get('/{username}','UsersController@show');
 
 Route::get('/{username}/follows','UsersController@follows');
+Route::get('/{username}/followers','UsersController@followers');
+
 Route::post('/{username}/follow','UsersController@follow')->middleware('auth');
+Route::post('/{username}/unfollow','UsersController@unfollow')->middleware('auth');
 
 // Route::get('/home', 'HomeController@index')->name('home');

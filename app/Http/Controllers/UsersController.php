@@ -21,7 +21,17 @@ class UsersController extends Controller
         $user = $this->findByUsername($username);
 
         return view('users.follows',[
-            'user'=>$user
+            'user'=>$user,
+            'follows'=>$user->follows,
+        ]);
+    }
+    public function followers($username){
+        // $user = User::where('username',$username)->firstOrFail();
+        $user = $this->findByUsername($username);
+
+        return view('users.follows',[
+            'user'=>$user,
+            'follows'=> $user->followers,
         ]);
     }
     
@@ -33,6 +43,16 @@ class UsersController extends Controller
         $me->follows()->attach($user);
         //al retornar se puede agregar un mensaje de exito
         return \redirect("/$username")->withSuccess('Usuario seguido');
+
+    }
+    public function unfollow($username, Request $request){
+        $user = $this->findByUsername($username);
+        //el usuario loggeado esta en el request
+        $me = $request->user();
+        //al usuario loggeado que de sus follows se desagrega al usuario que va a seguir
+        $me->follows()->detach($user);
+        //al retornar se puede agregar un mensaje de exito
+        return \redirect("/$username")->withSuccess('Usuario no seguido');
 
     }
 
