@@ -45,4 +45,18 @@ class User extends Authenticatable
         //se ordena basandose en el campo created_at de forma descendiente
         return $this->hasMany(Message::class)->orderBy('created_at','desc');
     }
+    //esta relación permitirá conocer los usuarios que sigue un usuario 
+    public function follows(){
+        // recibe el modelo, la tabla, la foreign key y la related key
+        //de esta forma se busca los otros usuarios, en donde yo soy el user_id 
+        //y los follws son los otros, es decir, yo los sigo a ellos
+        //seguidos
+        return $this->belongsToMany(User::class, 'followers', 'user_id', 'followed_id');
+    }
+    //esta relación permitirá conocer mis seguidores
+    public function followers(){
+        //yo soy el que es seguido, dime quien son los que me siguen
+        //seguidores
+        return $this->belongsToMany(User::class, 'followers', 'followed_id','user_id');
+    }
 }
