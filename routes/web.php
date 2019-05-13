@@ -26,3 +26,6 @@ Route::post('/{username}/follow','UsersController@follow')->middleware('auth');
 Route::post('/{username}/unfollow','UsersController@unfollow')->middleware('auth');
 
 // Route::get('/home', 'HomeController@index')->name('home');
+//rutas de login con facebook
+Route::get('/auth/facebook','SocialAuthController@facebook');
+Route::get('/auth/facebook/callback','SocialAuthController@callback');
