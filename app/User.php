@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Message;
+use App\socialProfiles;
 
 class User extends Authenticatable
 {
@@ -64,5 +65,10 @@ class User extends Authenticatable
         //al usuario en cuestion, devuelve true si el usuario que recibe esta función esta dentro 
         //de los suarios que sigo o false en caso contrario
         return $this->follows->contains($user);
+    }
+    
+    public function socialProfiles(){
+        //esta relación indica que un usuario tiene muchos perfiles pero el perfil pertenece a un usuario
+        return $this->hasMany(SocialProfile::class);
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 
+
 class UsersController extends Controller
 {
     public function show($username){
@@ -60,4 +61,5 @@ class UsersController extends Controller
     private function findByUsername($username){
         return User::where('username',$username)->firstOrFail();
     }
+
 }
