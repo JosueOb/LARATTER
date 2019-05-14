@@ -17,6 +17,24 @@ class SocialAuthController extends Controller
         //se obtiene el usuario que entrega facebook
         $user = Socialite::driver('facebook')->user();
         // dd($user);
+
+        //se verifica si el usuario tenga una red social con el id que nos dio facebook
+        //se hace una consulta en donde el usuario tenga al menos una socialprofile que 
+        //cumpla una condición
+        //el primer parámetro que recibe whereHas es el nombre de la table y después una función anónima
+        //que recibe un objeto query como parámetro y se usa los parametros de facebook
+        $existing = User::whereHas('socialProfiles', function($query) use($user){
+            //la consulta interna busca dentro del socialProfile que se encuentre, debe tener
+            //su social_id igual al user_id, se verifica si en la BDD ya se a guaradado una social profile
+            //con el id de facebook
+            $query->where('social_id', $user->getId());
+        })->first();
+
+        if($existing !== null){
+            auth()->login($existing);
+            return \redirect('/');
+        }
+
         //se utiliza la función seccion y flash de laravel
         //donde flash permite guardar temporalmente en sessión datos que queremos que luego del
         //siguiente pedido no se encuentren en sesión de tal forma no se llenará la seción de datos innecesarios
