@@ -7,6 +7,16 @@
 
     {{-- se verifica que el usuario este loggeado --}}
     @if (Auth::check())
+    {{-- para utilizar una regla definida en la parte de providers AuthServiceProvider --}}
+        @if (Gate::allows('dms', $user))
+        <form action="/{{ $user->username }}/dms">
+            @csrf
+            <input type="text" name="message" class="form-control">
+            <button class="btn btn-success" type="submit">Enviar DM</button>
+        </form>
+            
+        @endif
+
     {{-- Se verifica que si el usuario loggeado ya sigue o no un determinado usuario --}}
         @if (Auth::user()->isFollowing($user))
             <form action="/{{ $user->username }}/unfollow" method="POST">
