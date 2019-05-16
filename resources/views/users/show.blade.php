@@ -9,7 +9,7 @@
     @if (Auth::check())
     {{-- para utilizar una regla definida en la parte de providers AuthServiceProvider --}}
         @if (Gate::allows('dms', $user))
-        <form action="/{{ $user->username }}/dms">
+        <form action="/{{ $user->username }}/dms" method="POST">
             @csrf
             <input type="text" name="message" class="form-control">
             <button class="btn btn-success" type="submit">Enviar DM</button>

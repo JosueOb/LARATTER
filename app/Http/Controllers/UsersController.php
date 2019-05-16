@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
-
+use App\Conversation;
+use App\PrivateMessage;
 
 class UsersController extends Controller
 {
@@ -55,6 +56,41 @@ class UsersController extends Controller
         //al retornar se puede agregar un mensaje de exito
         return \redirect("/$username")->withSuccess('Usuario no seguido');
 
+    }
+
+    public function sendPrivateMessage($username, Request $request){
+        $user = $this->findByUsername($username);
+        $me = $request->user();
+        $message = $request->input('message');
+
+        //se obtiene la conversación entre estos dos usuarios
+        $conversation = Conversation::create();
+        //se utiliza la relación creado en el modelo de Conversation
+        $conversation->users()->attach($me);
+        $conversation->users()->attach($user);
+
+        //se crea un mensaje privado a la conversación
+        $privateMessage = PrivateMessage::create([
+            'user_id' => $me->id,
+            'conversation_id' => $conversation->id,
+            'message'=> $message,
+        ]);
+
+        return redirect('/conversations/'.$conversation->id);
+
+    }
+    public function showConversation(Conversation $conversation){
+        //se carga en conversación sus users y privateMessages metodos definidos 
+        //en el modelo de conversation
+        //el método load() indica al objeto que venga cargado con los usuarios y mensajes
+        $conversation->load('users', 'privateMessages');
+        // dd($conversation);
+
+        return view('users.convesation',[
+            'conversation'=> $conversation,
+            'user'=>auth()->user(),//se envia el usuario logeado, se podrá saber en el template si el
+            //mensaje es mío o de la otra persona
+        ]);
     }
 
     // esta función se crea para eficar tener la query en las demás funciones
