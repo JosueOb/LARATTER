@@ -63,11 +63,18 @@ class UsersController extends Controller
         $me = $request->user();
         $message = $request->input('message');
 
-        //se obtiene la conversación entre estos dos usuarios
-        $conversation = Conversation::create();
-        //se utiliza la relación creado en el modelo de Conversation
-        $conversation->users()->attach($me);
-        $conversation->users()->attach($user);
+        //se pregunta si ya se tiene una conversación con el otro usuario
+        //este método between se lo define en la clase conversation
+        $conversation = Conversation::between($me,$user);
+ 
+        //se procede a eliminar la creación de la conversación en este controlador
+        //ya que en el método between se creará a la misma
+
+        // //se obtiene la conversación entre estos dos usuarios
+        // $conversation = Conversation::create();
+        // //se utiliza la relación creado en el modelo de Conversation
+        // $conversation->users()->attach($me);
+        // $conversation->users()->attach($user);
 
         //se crea un mensaje privado a la conversación
         $privateMessage = PrivateMessage::create([
