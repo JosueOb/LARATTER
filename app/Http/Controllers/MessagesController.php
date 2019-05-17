@@ -28,9 +28,14 @@ class MessagesController extends Controller
         // ]);
         // return 'Creación de mensaje';
         $user = $request->user();//se obtiene el usuario loggeado
+        $image = $request->file('image');//se obtiene un objeto file que representa a la imagen subida en el formulario
         $message = new Message();
         $message->content = $request->get('message');
-        $message->image = 'http://lorempixel.com/600/330?'.mt_rand(0,1000);
+        //se guarda la imagen en una carpeta, como segundo parámetro es el nombre de la carpeta, el método store entraga un link a la imagen guardada por laravel, 
+        //el nombre es alazar para evitar colisiones de nombre
+        //el primer parámetro es el nombre de la carpeta a crear para guardar las imagenes y el segundo el nombre 
+        //de la carpeta que contendrá a la primera carpeta
+        $message->image = $image->store('messages', 'public');
         $message->user_id = $user->id;
         $message->save();
         // dd($message);

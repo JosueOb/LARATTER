@@ -18,4 +18,17 @@ class Message extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
+    //función magica para convertir una propiedad en una función
+    //esta función pisa a la funcion del objeto, interceptando el pedido a cualquier propiedad
+    //como ejemplo getAvatarAtribute, se intercepta cualquier pedido a una propiedad
+    public function getImageAttribute($image){
+        //si no se tiene una imagen o empieza con http, se devuelve la image, es decir la url
+        //starts_with recibe como parámetros la image y el texto con el que debería empresar
+        //
+        if(!$image || \starts_with($image, 'http')){
+            return $image;
+        }
+        //caso contrario se retorna la ruta hacia la imgane guardada en Laravel
+        return \Storage::disk('public')->url($image);
+    }
 }

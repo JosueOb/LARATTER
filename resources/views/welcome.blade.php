@@ -14,7 +14,7 @@ secciones especificadas en el layout-->
     </nav>
 </div>
 <div class="row">
-    <form action="/messages/create" method="POST">
+    <form action="/messages/create" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
             <input type="text" name="message" class="form-control" placeholder="Qué estás pensando?">
@@ -28,6 +28,7 @@ secciones especificadas en el layout-->
                 </ul>
             </div>
             @endif
+            <input type="file" class="form-control-file" name="image">
         </div>
     </form>
 </div>
