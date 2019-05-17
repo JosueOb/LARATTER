@@ -26,11 +26,22 @@
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
+                <ul class="nav navbar-nav">
+                    <li class="nav-item">
+                        <form action="/messages" method="GET">
+                            <div class="input-group">
+                                <input class="form-control" type="text" name="query" required placeholder="Buscar">
+                                <button class="btn btn-outline-success" type="submit">Buscar</button>
+                            </div>
+                        </form>
+                    </li>
+                </ul>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
 

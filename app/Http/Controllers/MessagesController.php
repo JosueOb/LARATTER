@@ -41,4 +41,23 @@ class MessagesController extends Controller
         // dd($message);
         return \redirect('/messages/'.$message->id);
     }
+    //método para la busqueda de mensajes
+    public function search(Request $request){
+        $query = $request->input('query');
+        //se utiliza el modelo de mensajes para hacer una busqueda de texto, si se desea realizar en la BDD
+        //se tendria que realizar la busqueda con un like para encontrar ese texto en alguna parte de contenido 
+        //del mensaje
+        // la variable query esta entre comillas y porcentajes, se reliaza para encontrar el texto en cualquier'
+        //parte del mensaje
+        //en este caso se pide que el mensaje venga con su usuario, y luego la query
+        //laravel realiza la primer query y luego para todos los resultados obtenidos 
+        //traer los usuarios correspondientes
+        //esto evita hacer una query extra por cada resultado obtenido
+        $messages = Message::with('user')->where('content', 'LIKE', "%$query%")->get();
+
+        return view('messages.index', [
+            'messages'=> $messages
+        ]);
+    }
 }
+

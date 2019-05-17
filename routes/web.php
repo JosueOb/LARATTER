@@ -12,6 +12,8 @@
 */
 
 Route::get('/','PagesController@home');
+
+Route::get('/messages','MessagesController@search');
 // Route::get('/messages/{id}', 'MessagesController@show');
 Route::get('/messages/{message}', 'MessagesController@show');//se espera un objeto message
 // Route::post('/messages/create', 'MessagesController@create')->middleware('auth');//se protege esta ruta

@@ -167,6 +167,7 @@ return [
          */
         Laravel\Tinker\TinkerServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,//hace que en todos los perdidos laravel este disponible el código de Socialite
+        Barryvdh\Debugbar\ServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -227,6 +228,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,//nos permite usar los servicios de socialite usando solamente la clase Socialite
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
     ],
 
 ];
