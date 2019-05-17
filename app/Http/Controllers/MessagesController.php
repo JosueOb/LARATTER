@@ -53,7 +53,20 @@ class MessagesController extends Controller
         //laravel realiza la primer query y luego para todos los resultados obtenidos 
         //traer los usuarios correspondientes
         //esto evita hacer una query extra por cada resultado obtenido
-        $messages = Message::with('user')->where('content', 'LIKE', "%$query%")->get();
+        // $messages = Message::with('user')->where('content', 'LIKE', "%$query%")->get();
+        //la función seach, utiliza laravel scout, que recibe la query, se puede paginar la busqueda 
+        //ubicando al último ->paginate()
+        //ojo al utilizar with, se esta armando una query, por lo cual no se puede utilizar algolia
+
+        // $messages = Message::with('user')->search($query)->get();
+
+        //para solucionar este problema se separa en dos la query y algolia
+        //primero se realiza la busqueda 
+        $messages = Message::search($query)->get();
+        //a los resultados se pide que se carguen sus usuarios,
+        //with sirve para armar una query y load es pra acuando ya se tiene una query ya ejecutada
+        $messages->load('user');
+
 
         return view('messages.index', [
             'messages'=> $messages

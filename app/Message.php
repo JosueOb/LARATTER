@@ -4,9 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\User;
+use Laravel\Scout\Searchable;
 
 class Message extends Model
 {
+    //esta manera el modelo esta listo para estar indexado para ser utilizado en argolia
+    use Searchable;
     // este atributo guarded nos protege de creación de objetos de forma masiva
     //para crear un objeto se debe indicar que cosas proteger y que no.
     //guarded es una propiedad que contiene un array de las columnas que se van a proteger.
