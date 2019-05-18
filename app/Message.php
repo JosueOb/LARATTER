@@ -34,4 +34,12 @@ class Message extends Model
         //caso contrario se retorna la ruta hacia la imgane guardada en Laravel
         return \Storage::disk('public')->url($image);
     }
+    //se pisa el método de Searchable, y se le indica que se desea que contenga algolia
+    //se devuelve un array
+    public function toSearchableArray(){
+        //se devuelve un mensaje con su usuario
+        //se carga el usuario y luego se devuelve en forma de un array
+        $this->load('user');
+        return $this->toArray();
+    }
 }
