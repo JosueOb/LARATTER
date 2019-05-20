@@ -35,7 +35,8 @@ class UserFollowed extends Notification
     public function via($notifiable)
     {
         //por donde se notifica el usuario
-        return ['mail'];
+        //database indica a laravel que guarde la notificación en la BDD
+        return ['mail', 'database'];
     }
 
     /**
@@ -63,8 +64,10 @@ class UserFollowed extends Notification
      */
     public function toArray($notifiable)
     {
+        //este array permite enviar datos en el campo data al guardarlo en la BDD
+        //en formaro json
         return [
-            //
+            'follower' => $this->follower,
         ];
     }
 }
