@@ -6,4 +6,9 @@
 <small class="text-muted"> {{$message->created_at}}</small>
 </p> --}}
 @include('messages.message')
+
+{{-- Para utilizar Vuej, se utilizan etiquetas que Vue lo va a leer, cuando carge la aplicación
+    y lo va a reemplazar  por un HTML generado en el lado del navegador --}}
+    {{-- se envia como propiedad de la etiqueta response el id del mensaje --}}
+<responses :message="{{ $message->id }}"></responses>
 @endsection
