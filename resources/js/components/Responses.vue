@@ -7,6 +7,9 @@
         <!-- directiva de vue -->
         <div class="col-12 mt-2" v-for="response in responses">
             <div class="card">
+                <div class="card-header">
+                    Escrito por {{response.user.name}}
+                </div>
                 <div class="card-body">
                     {{ response.message }}
                 </div>
@@ -36,6 +39,7 @@
              axios.get('/api/messages/'+ this.message +'/responses')
              .then(res =>{
                  this.responses = res.data;
+                 console.log(this.responses)
              })//prosesa la procesa la respuesta del pedido, recibe una función
          }
      }

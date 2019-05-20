@@ -1782,6 +1782,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   //se definen las propiedades
   //no son datos modificables, se los recibe por parametros desde afuera y se cambian desde afuera
@@ -1799,6 +1802,7 @@ __webpack_require__.r(__webpack_exports__);
       //una petición ajax a traves de promesas, ? this.message el id del message recibido como parametro
       axios.get('/api/messages/' + this.message + '/responses').then(function (res) {
         _this.responses = res.data;
+        console.log(_this.responses);
       }); //prosesa la procesa la respuesta del pedido, recibe una función
     }
   }
@@ -37122,6 +37126,14 @@ var render = function() {
       _vm._l(_vm.responses, function(response) {
         return _c("div", { staticClass: "col-12 mt-2" }, [
           _c("div", { staticClass: "card" }, [
+            _c("div", { staticClass: "card-header" }, [
+              _vm._v(
+                "\n                Escrito por " +
+                  _vm._s(response.user.name) +
+                  "\n            "
+              )
+            ]),
+            _vm._v(" "),
             _c("div", { staticClass: "card-body" }, [
               _vm._v(
                 "\n                " +
