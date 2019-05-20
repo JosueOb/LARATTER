@@ -7,6 +7,8 @@ use App\User;
 use App\Conversation;
 use App\PrivateMessage;
 
+use App\Notifications\UserFollowed;
+
 class UsersController extends Controller
 {
     public function show($username){
@@ -43,6 +45,10 @@ class UsersController extends Controller
         $me = $request->user();
         //al usuario loggeado que de sus follows le agrega al usuario que va a seguir
         $me->follows()->attach($user);
+
+        //al usuario se le notifica que el usuario logeado lo sigue
+        //notify() es un trait Notifiable que esta implementado en el modelo User
+        $user->notify(new UserFollowed($me));
         //al retornar se puede agregar un mensaje de exito
         return \redirect("/$username")->withSuccess('Usuario seguido');
 
