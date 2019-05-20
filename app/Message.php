@@ -42,4 +42,11 @@ class Message extends Model
         $this->load('user');
         return $this->toArray();
     }
+
+    //un mensaje tiene varias repsuestas
+    public function responses (){
+        // return $this->hasMany(Response::class)->orderBy('created_at', 'desc');
+        // latest() es una función ordena por creación descendiente
+        return $this->hasMany(Response::class)->latest();
+    }
 }

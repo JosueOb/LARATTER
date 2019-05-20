@@ -72,5 +72,11 @@ class MessagesController extends Controller
             'messages'=> $messages
         ]);
     }
+
+    public function responses(Message $message){
+        //para devolver un JSON en vez de una vista, para ello se devuelve un objeto Eloquent
+        //siendo la manera más fácil de retornar un JSON
+        return $message->responses;
+    }
 }
 
