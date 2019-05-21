@@ -21,6 +21,7 @@ window.Vue = require('vue');
 
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('responses', require('./components/Responses.vue').default);
+Vue.component('notifications', require('./components/Notifications.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
