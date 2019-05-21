@@ -11,6 +11,8 @@
 |
 */
 
+//aqui se tiene el canal privado configurado para cada  usuario en donde para poder escuchar este canal
+//debe estar logeado 
 Broadcast::channel('App.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });

@@ -8,6 +8,9 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Support\Facades\Broadcast;
+use Illuminate\Broadcasting\BroadcastManager;
+use Illuminate\Notifications\Messages\BroadcastMessage;
 
 class UserFollowed extends Notification
 {
@@ -36,7 +39,8 @@ class UserFollowed extends Notification
     {
         //por donde se notifica el usuario
         //database indica a laravel que guarde la notificación en la BDD
-        return ['mail', 'database'];
+        //se habilita boardcasting 
+        return ['mail', 'database','broadcast'];
     }
 
     /**
@@ -69,5 +73,18 @@ class UserFollowed extends Notification
         return [
             'follower' => $this->follower,
         ];
+    }
+    //se tiene que convertir el mensaje a toBrodcast
+    public function toBroadcast($notifiable){
+    //devuelve un objeto BroadcastMessage, siendo un objeto que se puede serializar 
+    //y que laravel lo va a usar para enviar desde el server hacia los clientes'
+    //el único parámetro que tiene en construcción es un arrray de datos, se utiliza el array de toArray
+    //es decir, se comparte los datos que se guarda en la BDD y se hace broadcast 
+
+    
+    //se agrega la key data para que sea compactive con la api y pusher 
+        return new BroadcastMessage([
+            'data'=>$this->toArray($notifiable),
+        ]);
     }
 }
